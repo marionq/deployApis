@@ -1,0 +1,29 @@
+- hosts: nodo3
+  vars_files:
+    - varsDeployApis.yml
+  tasks:
+
+    - name: Start server-zuul service
+      become: yes
+      become_user: root
+      ansible.builtin.systemd:
+        state: stopped
+        name: server-zuul.service
+        enabled: true
+
+    - name: Copy server-zuul
+      become: yes
+      become_user: root
+      ansible.builtin.copy:
+        src: "{{ path_base_servers }}/{{ path_server_zuul }}/server-zuul-0.0.1.jar"
+        dest: "/u01/server-zuul"
+        owner: jvmapps
+        group: appmgr
+
+    - name: Start /u01/server-zuul service
+      become: yes
+      become_user: root
+      ansible.builtin.systemd:
+        state: started
+        name: server-zuul.service
+        enabled: true

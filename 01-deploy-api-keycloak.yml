@@ -1,0 +1,29 @@
+- hosts: nodo2
+  vars_files:
+    - varsDeployApis.yml
+  tasks:
+
+    - name: Stop api-keycloak service
+      become: yes
+      become_user: root
+      ansible.builtin.systemd:
+        state: stopped
+        name: api-keycloak.service
+        enabled: true
+
+    - name: Copy api-keycloak
+      become: yes
+      become_user: root
+      ansible.builtin.copy:
+        src: "{{ path_base_apis }}/{{ path_api_keycloak }}/api-keycloak-0.0.1.jar"
+        dest: "/u01/api-keycloak"
+        owner: jvmapps
+        group: appmgr
+
+    - name: Start api-keycloak service
+      become: yes
+      become_user: root
+      ansible.builtin.systemd:
+        state: started
+        name: api-keycloak.service
+        enabled: true

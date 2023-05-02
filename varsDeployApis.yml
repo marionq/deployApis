@@ -1,0 +1,22 @@
+---
+packages:
+  - jdk-11.0.17_linux-x64_bin.rpm
+  - hadoop-3.3.4.tar.gz
+  - apache-zookeeper-3.8.1.tar.gz
+
+ip_nodo1: 172.25.254.81
+ip_nodo2: 172.25.254.82
+ip_nodo3: 172.25.254.83
+
+hostname_nodo1: apis01
+hostname_nodo2: apis02
+hostname_nodo3: apis03
+
+
+path_base_servers: /var/lib/jenkins/ansible/mavenProjects/AutofinParent/servers
+path_server_zuul: server-zuul/target
+
+path_base_apis: /var/lib/jenkins/ansible/mavenProjects/AutofinParent/apis
+path_api_keycloak: api-keycloak/target
+
+
